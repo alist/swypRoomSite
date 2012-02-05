@@ -87,15 +87,14 @@ Swyp.documentController = Ember.ArrayProxy.create({
   },
 
   populate: function(){
-    var that = this;
 
     var uri='{"location": {"$nearSphere":{"__type":"GeoPoint", "latitude":'+lati+', "longitude":'+longi+'}}}';
-    var enur = encodeURIComponent(uri);			
+    var enur = encodeURIComponent(uri);
     var params = "limit="+ 10 +"&where="+enur;
     
     $.ajax({
       url: "https://api.parse.com/1/classes/RoomObject?"+params, 
-      headers:this.get('parseHeaders'),
+      headers: Swyp.documentController.get('parseHeaders'),
       dataType: 'json',
 
       success: function(data){
@@ -103,12 +102,12 @@ Swyp.documentController = Ember.ArrayProxy.create({
         console.log(results);
         results.forEach(function(result){
           console.log('another result '+result);
-          that.addDocument(Swyp.Document.create(result));
+          Swyp.documentController.addDocument(Swyp.Document.create(result));
           
           if (result.user && result.user.objectId){
             var userId = result.user.objectId;
             console.log('user '+userId);
-            that.getUser(userId);
+            Swyp.documentController.getUser(userId);
           }
         });
       },
