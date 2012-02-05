@@ -41,7 +41,15 @@ Swyp.Document = Ember.Object.extend({
     return this.get('thumbnail').url
   }.property('thumbnail'),
   location: null,
+  userFBId: null,
+  fbPictureURL: function(){
+	return this.get('fbURL')+'/picture';
+  }.property('userFBId'),
+  fbURL: function(){
+	return 'http://graph.facebook.com/'+this.get('userFBId');
+  }.property('userFBId'),
   user: null,
+  userName: null,
   progress: 0,
   style: null,
   isUploading: false,
@@ -103,13 +111,16 @@ Swyp.documentController = Ember.ArrayProxy.create({
         console.log(results);
         results.forEach(function(result){
           console.log('another result '+result);
-          Swyp.documentController.addDocument(Swyp.Document.create(result));
-          
-          if (result.user && result.user.objectId){
-            var userId = result.user.objectId;
-            console.log('user '+userId);
-            Swyp.documentController.getUser(userId);
-          }
+		  var doc = Swyp.Document.create(result);
+          Swyp.documentController.addDocument(doc);
+		  $.getJSON(doc.get('fbURL'), function(data){
+			if(data.name){
+				doc.set('userName', data.name);
+			} else {
+				console.log(data);
+			}
+		  });
+		  
         });
       },
       error: function(e){
@@ -240,8 +251,10 @@ $(document).ready(function(){
 
 var map;
 
-function initialize() {
-  var myOptions = {
+
+
+  function initialize() {
+        var myOptions = {
     zoom: 17,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
@@ -249,7 +262,7 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map_canvas'),
       myOptions);
 
-  // Try HTML5 geolocation
+
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
@@ -260,7 +273,7 @@ function initialize() {
 
       Swyp.documentController.populate();
 
-      var infowindow = new google.maps.Marker({
+      var dmark = new google.maps.Marker({
         map: map,
         position: pos
       });
@@ -273,7 +286,50 @@ function initialize() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
-}
+
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+          infowindow.close();
+		  
+          var place = autocomplete.getPlace();
+         
+          map.setCenter(place.geometry.location);
+          map.setZoom(17);  // Why 17? Because it looks good.
+		  
+		  longi=place.geometry.location.longitude;
+		  
+		  lati=place.geometry.location.latitude;
+		  
+		  Swyp.documentController.set("content",[]);
+		  Swyp.documentController.populate();
+          
+
+          var dmark = new google.maps.Marker({
+			map: map,
+			position: place.geometry.location
+		});
+
+          var address = '';
+          if (place.address_components) {
+            address = [(place.address_components[0] &&
+                        place.address_components[0].short_name || ''),
+                       (place.address_components[1] &&
+                        place.address_components[1].short_name || ''),
+                       (place.address_components[2] &&
+                        place.address_components[2].short_name || '')
+                      ].join(' ');
+          }
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
 
 
 function handleNoGeolocation(errorFlag) {
@@ -293,4 +349,5 @@ function handleNoGeolocation(errorFlag) {
   map.setCenter(options.position);
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+}
+
