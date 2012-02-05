@@ -81,7 +81,7 @@ Swyp.documentController = Ember.ArrayProxy.create({
 
     var uri='{"location": {"$nearSphere":{"__type":"GeoPoint", "latitude":'+lati+', "longitude":'+longi+'}}}';
     var enur = encodeURIComponent(uri);
-    var params = "limit="+ 10 +"&where="+enur;
+    var params = "limit="+ 30 +"&where="+enur;
     
     $.ajax({
       url: "https://api.parse.com/1/classes/RoomObject?"+params, 
