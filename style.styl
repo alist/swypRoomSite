@@ -60,11 +60,13 @@ a
 #file_list
   margin-top 100px
   background none
-  width 960px
+  width 974px
   left 50%
   margin-left -480px
-  overflow hidden
+  overflow-y scroll
+  overflow-x hide
   li_width = 480px - 24px - 1px
+  max-height 436px
   position absolute
   z-index 2
 
@@ -73,6 +75,10 @@ a
     width auto
     float left
     margin-right 16px
+
+  & .profilePic
+    float right
+    margin-top -54px
 
   & li
     padding 16px 12px
@@ -128,3 +134,20 @@ a
       & h3
         color #fff
 
+
+#searchField
+  text-align:center;
+  position:absolute;
+  top:50;
+  right:0;
+  z-index:3;
+  padding: 12px;
+  width:454px;
+  float:left;
+  border-bottom:1px solid #b6b99b;
+  border-right:1px solid #b6b99b;
+  background:linear-gradient(top, #fff 0%, #edeee6 100%);
+  opacity:.65;
+
+  &:hover
+    opacity:1;

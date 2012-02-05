@@ -18,7 +18,6 @@ Swyp.errorView.addObserver('errors', function(){
   }
 });
 
-
 Swyp.Document = Ember.Object.extend({
   objectId: null,
   file: null,
@@ -43,10 +42,10 @@ Swyp.Document = Ember.Object.extend({
   location: null,
   userFBId: null,
   fbPictureURL: function(){
-	return this.get('fbURL')+'/picture';
+  return this.get('fbURL')+'/picture';
   }.property('userFBId'),
   fbURL: function(){
-	return 'http://graph.facebook.com/'+this.get('userFBId');
+  return 'http://graph.facebook.com/'+this.get('userFBId');
   }.property('userFBId'),
   user: null,
   userName: null,
@@ -61,7 +60,7 @@ Swyp.Document = Ember.Object.extend({
   },
 });
 
-
+var fb_users = {};
 
 Swyp.documentController = Ember.ArrayProxy.create({
   content: [],
@@ -71,28 +70,11 @@ Swyp.documentController = Ember.ArrayProxy.create({
 
   addDocument: function(doc){
     if (!this.get('content').findProperty('objectId', doc.objectId)){
-      this.pushObject(doc);
+      this.unshiftObject(doc);
     }
   },
   removeDocument: function(doc){
     this.removeObject(doc);
-  },
-
-  getUser: function(objectID){
-    var that = this;
-    $.ajax({
-      url: "https://api.parse.com/1/users/"+objectID,
-      headers:that.get('parseHeaders'),
-      dataType: 'json',
-
-      success: function(data){
-        var results = data;
-        console.log(results);
-      },
-      error: function(e){
-        console.log('error');
-      }
-    });
   },
 
   populate: function(){
@@ -111,16 +93,25 @@ Swyp.documentController = Ember.ArrayProxy.create({
         console.log(results);
         results.forEach(function(result){
           console.log('another result '+result);
-		  var doc = Swyp.Document.create(result);
+
+          var doc = Swyp.Document.create(result);
           Swyp.documentController.addDocument(doc);
-		  $.getJSON(doc.get('fbURL'), function(data){
-			if(data.name){
-				doc.set('userName', data.name);
-			} else {
-				console.log(data);
-			}
-		  });
-		  
+
+          var fbID = doc.get('userFBId');
+          console.log(fbID);
+          if (fbID in fb_users){
+            doc.set('userName', fb_users[fbID]);
+          } else {
+            
+            $.getJSON(doc.get('fbURL'), function(data){
+              if(data.name){
+                doc.set('userName', data.name);
+                fb_users[fbID] = data.name;
+              } else {
+                console.log(data);
+              }
+            });
+          }
         });
       },
       error: function(e){
@@ -297,24 +288,24 @@ var map;
 
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
           infowindow.close();
-		  
+      
           var place = autocomplete.getPlace();
          
           map.setCenter(place.geometry.location);
           map.setZoom(17);  // Why 17? Because it looks good.
-		  
-		  longi=place.geometry.location.longitude;
-		  
-		  lati=place.geometry.location.latitude;
-		  
-		  Swyp.documentController.set("content",[]);
-		  Swyp.documentController.populate();
+      
+      longi=place.geometry.location.longitude;
+      
+      lati=place.geometry.location.latitude;
+      
+      Swyp.documentController.set("content",[]);
+      Swyp.documentController.populate();
           
 
           var dmark = new google.maps.Marker({
-			map: map,
-			position: place.geometry.location
-		});
+      map: map,
+      position: place.geometry.location
+    });
 
           var address = '';
           if (place.address_components) {
