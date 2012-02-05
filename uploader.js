@@ -102,7 +102,8 @@ Swyp.documentController = Ember.ArrayProxy.create({
           console.log('another result '+result);
           that.addDocument(Swyp.Document.create(result));
           
-          if (result.user){
+          if (result.user && result.user !== undefined){
+            console.log('user '+result.user);
             that.getUser(result.user.objectID);
           }
         });
