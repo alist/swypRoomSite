@@ -22,8 +22,9 @@ Swyp.errorView.addObserver('errors', function(){
 Swyp.Document = Ember.Object.extend({
   objectId: null,
   file: null,
-  fileName: function(){ 
-    return this.get('file').name;
+  fileName: function(){
+    var file_parts = _.last(this.get('file').name.split('.')).split('_');
+    return file_parts[1]+' '+file_parts[0];
   }.property('file'),
   fileSize: function(){ 
     return this.get('file').size;
