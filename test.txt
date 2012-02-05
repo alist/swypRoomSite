@@ -1,0 +1,5 @@
+curl -X POST  -H "X-Parse-Application-Id: q3FiX8q6K5ajET6MFdRwSh2icYgS93TiH5jaqOpb" \
+  -H "X-Parse-REST-API-Key: xSn6JPXgyQTRtj1Y29jylJqQoo6zTVFzhaOz0RHy" \    
+  -H "Content-Type: text/plain" \
+  -d 'Maja says Hello World!' 
+  https://api.parse.com/1/files/test.txt

@@ -1,0 +1,25 @@
+<ul id="file_list">
+  {{#each Swyp.documentController.content}}
+    <li {{bindAttr class="isHidden:hidden"}}>
+      <span {{bindAttr data-progress="progress"}}
+        {{bindAttr class="isUploading"}}
+        {{bindAttr style="style"}}>
+
+        <h3>
+          {{#if isUploading}}
+            {{fileName}} {{progress}}%
+          {{else}}
+            <a {{bindAttr href="url"}}>
+              {{fileName}}
+            </a>
+          {{/if}}
+        </h3>
+
+        <p>
+          Uploaded by <em>{{user.name}}</em>
+        </p>
+
+      </span>
+    </li>
+  {{/each}}
+</ul>

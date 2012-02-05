@@ -1,0 +1,8 @@
+Parse API stuff
+
+
+Application Id:	q3FiX8q6K5ajET6MFdRwSh2icYgS93TiH5jaqOpb
+Client Key:	eZVynljiAJID7xT6lq806fpQa642kjm1r7fh8gJk
+REST API Key:	xSn6JPXgyQTRtj1Y29jylJqQoo6zTVFzhaOz0RHy
+Master Key:	SGXhSMekswUuBfexxOtiDwjWBh3PgtqECJvlIMfy
+

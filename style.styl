@@ -1,0 +1,120 @@
+@import 'lib/nib'
+
+global-reset()
+
+hgreen = #00b90a
+lgreen = #96e373
+header_height = 84px
+tree_height = 480px
+
+
+@font-face {
+  font-family 'Museo'
+  src: url('museo/Museo500-Regular-webfont.ttf') format('truetype')
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face
+  font-family 'Museo'
+  src url('museo/Museo300-Regular-webfont.ttf') format('truetype')
+  font-weight 300
+  font-style normal
+
+@font-face
+  font-family 'Museo'
+  src url('museo/Museo700-Regular-webfont.ttf') format('truetype')
+  font-weight bold
+  font-style normal
+
+.hidden
+  display none
+
+body
+  font-family 'Museo'
+
+a
+  position relative
+  text-decoration none
+  color inherit
+
+  &:active
+    top 1px
+
+#map_canvas
+  width: 100%
+  height: 100%
+
+
+#documents
+  border 1px solid #b6b99b
+  border-bottom none
+  overflow hidden
+  margin 48px 0
+
+  
+#file_list
+  background #fff
+  overflow hidden
+  li_width = 480px - 24px - 1px
+
+  & .thumb
+    max-height 50px
+    width auto
+    float left
+    margin-right 16px
+
+  & li
+    padding 16px 12px
+    width li_width - 1px
+    float left
+    border-bottom 1px solid #b6b99b
+    border-right 1px solid #b6b99b
+    background linear-gradient(top, #fff, lighten(#b6b99b, 75%))
+
+    &:hover
+      .edit
+        display block
+
+    &:nth-child(even)
+      border-right none
+      width li_width
+
+    & h3, & p
+      white-space nowrap
+      overflow hidden
+      text-overflow ellipsis
+      
+    & h3
+      font-weight bold
+      font-size 20px
+      max-width 360px
+      line-height 1.5
+      margin-bottom 8px
+      color hgreen
+
+      & a
+        color inherit
+        &:hover
+          color darken(hgreen, 25%)
+
+    & .round
+      float left
+      border-radius 8px
+      width 32px
+      height 32px
+
+    & .is-uploading
+      width 0px
+      height 74px
+      display block
+      overflow hidden
+      background linear-gradient(top, lgreen, hgreen)
+      padding 16px 12px
+      margin -16px -12px
+      color #fff
+      text-shadow 0px 1px 0px #000
+
+      & h3
+        color #fff
+

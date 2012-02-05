@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="style.css" type="text/css">
+
+    <script type="text/javascript" 
+      src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="underscore-min.js"></script>
+    <script type="text/javascript" src="underscore.string.min.js"></script>
+    <script type="text/javascript" src="ember-0.9.4.min.js"></script>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCJF25D4xBTZ8xPmIDiRPzAVYdr-K34anA&sensor=false">
+    </script>
+    <script type="text/javascript" src="uploader.js"></script>
+    
+
+  </head>
+  <body>
+    <div id="map_canvas"></div>
+	
+	<script type="text/x-handlebars">
+	<ul id="file_list">
+  {{#each Swyp.documentController.content}}
+    <li {{bindAttr class="isHidden:hidden"}}>
+      <span {{bindAttr data-progress="progress"}}
+        {{bindAttr class="isUploading"}}
+        {{bindAttr style="style"}}>
+
+        <img class="thumb" {{bindAttr src="thumbURL"}}>
+        <h3>
+          {{#if isUploading}}
+            {{fileName}} {{progress}}%
+          {{else}}
+            <a {{bindAttr href="url"}}>
+              {{fileName}}
+            </a>
+          {{/if}}
+        </h3>
+
+        <p>
+          Uploaded by <em>{{user.name}}</em>
+        </p>
+
+      </span>
+    </li>
+  {{/each}}
+</ul>
+</script>
+  </body>
+</html>

@@ -1,0 +1,206 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+@font-face {
+  font-family: 'Museo';
+  src: url("museo/Museo500-Regular-webfont.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Museo';
+  src: url("museo/Museo300-Regular-webfont.ttf") format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Museo';
+  src: url("museo/Museo700-Regular-webfont.ttf") format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+.hidden {
+  display: none;
+}
+body {
+  font-family: 'Museo';
+}
+a {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+a:active {
+  top: 1px;
+}
+#map_canvas {
+  width: 100%;
+  height: 100%;
+}
+#documents {
+  border: 1px solid #b6b99b;
+  border-bottom: none;
+  overflow: hidden;
+  margin: 48px 0;
+}
+#file_list {
+  background: #fff;
+  overflow: hidden;
+}
+#file_list .thumb {
+  max-height: 50px;
+  width: auto;
+  float: left;
+  margin-right: 16px;
+}
+#file_list li {
+  padding: 16px 12px;
+  width: 454px;
+  float: left;
+  border-bottom: 1px solid #b6b99b;
+  border-right: 1px solid #b6b99b;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #edeee6));
+  background: -webkit-linear-gradient(top, #fff 0%, #edeee6 100%);
+  background: -moz-linear-gradient(top, #fff 0%, #edeee6 100%);
+  background: linear-gradient(top, #fff 0%, #edeee6 100%);
+}
+#file_list li:hover .edit {
+  display: block;
+}
+#file_list li:nth-child(even) {
+  border-right: none;
+  width: 455px;
+}
+#file_list li h3,
+#file_list li p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#file_list li h3 {
+  font-weight: bold;
+  font-size: 20px;
+  max-width: 360px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  color: #00b90a;
+}
+#file_list li h3 a {
+  color: inherit;
+}
+#file_list li h3 a:hover {
+  color: #008b08;
+}
+#file_list li .round {
+  float: left;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+}
+#file_list li .is-uploading {
+  width: 0px;
+  height: 74px;
+  display: block;
+  overflow: hidden;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #96e373), color-stop(1, #00b90a));
+  background: -webkit-linear-gradient(top, #96e373 0%, #00b90a 100%);
+  background: -moz-linear-gradient(top, #96e373 0%, #00b90a 100%);
+  background: linear-gradient(top, #96e373 0%, #00b90a 100%);
+  padding: 16px 12px;
+  margin: -16px -12px;
+  color: #fff;
+  text-shadow: 0px 1px 0px #000;
+}
+#file_list li .is-uploading h3 {
+  color: #fff;
+}
