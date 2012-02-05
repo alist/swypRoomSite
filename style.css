@@ -13,15 +13,15 @@ a{position:relative;text-decoration:none;color:inherit;}
 a:active{top:1px}
 #map_canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
 #documents{border:1px solid #b6b99b;border-bottom:none;overflow:hidden;margin:48px 0}
-#file_list{background:#fff;overflow:hidden;position:absolute;z-index:2;}
+#file_list{background:none;width:960px;left:50%;margin-left:-480px;overflow:hidden;position:absolute;z-index:2;}
 #file_list .thumb{max-height:50px;width:auto;float:left;margin-right:16px}
-#file_list li{padding:16px 12px;width:454px;float:left;border-bottom:1px solid #b6b99b;border-right:1px solid #b6b99b;background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #edeee6));background:-webkit-linear-gradient(top, #fff 0%, #edeee6 100%);background:-moz-linear-gradient(top, #fff 0%, #edeee6 100%);background:linear-gradient(top, #fff 0%, #edeee6 100%);}
-#file_list li:hover .edit{display:block}
+#file_list li{padding:16px 12px;width:454px;float:left;border-bottom:1px solid #b6b99b;border-right:1px solid #b6b99b;background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, #edeee6));background:-webkit-linear-gradient(top, #fff 0%, #edeee6 100%);background:-moz-linear-gradient(top, #fff 0%, #edeee6 100%);background:linear-gradient(top, #fff 0%, #edeee6 100%);opacity:.75;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=75);}
+#file_list li:hover{opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100)}
 #file_list li:nth-child(even){border-right:none;width:455px}
 #file_list li h3,#file_list li p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#file_list li h3{font-weight:bold;font-size:20px;max-width:360px;line-height:1.5;margin-bottom:8px;color:#00b90a;}
+#file_list li h3{font-weight:bold;font-size:20px;max-width:360px;line-height:1.5;margin-bottom:8px;color:#177cda;}
 #file_list li h3 a{color:inherit;}
-#file_list li h3 a:hover{color:#008b08}
+#file_list li h3 a:hover{color:#115da3}
 #file_list li .round{float:left;-webkit-border-radius:8px;-moz-border-radius:8px;border-radius:8px;width:32px;height:32px}
-#file_list li .is-uploading{width:0;height:74px;display:block;overflow:hidden;background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #96e373), color-stop(1, #00b90a));background:-webkit-linear-gradient(top, #96e373 0%, #00b90a 100%);background:-moz-linear-gradient(top, #96e373 0%, #00b90a 100%);background:linear-gradient(top, #96e373 0%, #00b90a 100%);padding:16px 12px;margin:-16px -12px;color:#fff;text-shadow:0 1px 0 #000;}
+#file_list li .is-uploading{width:0;height:74px;display:block;overflow:hidden;background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #1b92ff), color-stop(1, #177cda));background:-webkit-linear-gradient(top, #1b92ff 0%, #177cda 100%);background:-moz-linear-gradient(top, #1b92ff 0%, #177cda 100%);background:linear-gradient(top, #1b92ff 0%, #177cda 100%);padding:16px 12px;margin:-16px -12px;color:#fff;text-shadow:0 1px 0 #000;}
 #file_list li .is-uploading h3{color:#fff}

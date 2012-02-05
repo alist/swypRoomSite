@@ -2,8 +2,8 @@
 
 global-reset()
 
-hgreen = #00b90a
-lgreen = #96e373
+hgreen = #177cda
+lgreen = #1b92ff
 header_height = 84px
 tree_height = 480px
 
@@ -58,7 +58,10 @@ a
 
   
 #file_list
-  background #fff
+  background none
+  width 960px
+  left 50%
+  margin-left -480px
   overflow hidden
   li_width = 480px - 24px - 1px
   position absolute
@@ -77,10 +80,10 @@ a
     border-bottom 1px solid #b6b99b
     border-right 1px solid #b6b99b
     background linear-gradient(top, #fff, lighten(#b6b99b, 75%))
+    opacity 0.75
 
     &:hover
-      .edit
-        display block
+      opacity 1
 
     &:nth-child(even)
       border-right none

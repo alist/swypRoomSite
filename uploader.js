@@ -20,7 +20,7 @@ Swyp.errorView.addObserver('errors', function(){
 
 
 Swyp.Document = Ember.Object.extend({
-  id: null,
+  objectId: null,
   file: null,
   fileName: function(){ 
     return this.get('file').name;
@@ -61,16 +61,19 @@ Swyp.documentController = Ember.ArrayProxy.create({
                 "X-Parse-REST-API-Key": "xSn6JPXgyQTRtj1Y29jylJqQoo6zTVFzhaOz0RHy"},
 
   addDocument: function(doc){
-    this.pushObject(doc);
+    if (!this.get('content').findProperty('objectId', doc.objectId)){
+      this.pushObject(doc);
+    }
   },
   removeDocument: function(doc){
     this.removeObject(doc);
   },
 
   getUser: function(objectID){
+    var that = this;
     $.ajax({
       url: "https://api.parse.com/1/users/"+objectID,
-      headers:this.get('parseHeaders'),
+      headers:that.get('parseHeaders'),
       dataType: 'json',
 
       success: function(data){
@@ -78,7 +81,7 @@ Swyp.documentController = Ember.ArrayProxy.create({
         console.log(results);
       },
       error: function(e){
-        console.log(e);
+        console.log('error');
       }
     });
   },
@@ -102,9 +105,10 @@ Swyp.documentController = Ember.ArrayProxy.create({
           console.log('another result '+result);
           that.addDocument(Swyp.Document.create(result));
           
-          if (result.user && result.user !== undefined){
-            console.log('user '+result.user);
-            that.getUser(result.user.objectID);
+          if (result.user && result.user.objectId){
+            var userId = result.user.objectId;
+            console.log('user '+userId);
+            that.getUser(userId);
           }
         });
       },
@@ -228,6 +232,8 @@ $(document).ready(function(){
       uploadFile(f);
     }
   }
+
+  var refreshData = setInterval(Swyp.documentController.populate, 3000);
 
 });
 
